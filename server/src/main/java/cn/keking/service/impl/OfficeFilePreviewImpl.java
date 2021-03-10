@@ -42,7 +42,7 @@ public class OfficeFilePreviewImpl implements FilePreview {
         String baseUrl = BaseUrlFilter.getBaseUrl();
         String suffix = fileAttribute.getSuffix();
         String fileName = fileAttribute.getMd5Name();
-        boolean isHtml = suffix.equalsIgnoreCase("xls") || suffix.equalsIgnoreCase("xlsx");
+        boolean isHtml = suffix.equalsIgnoreCase("xls") || suffix.equalsIgnoreCase("xlsx") || suffix.equalsIgnoreCase("et");
         String pdfName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + (isHtml ? "html" : "pdf");
         String outFilePath = FILE_DIR + pdfName;
         // 判断之前是否已转换过，如果转换过，直接返回，否则执行转换
