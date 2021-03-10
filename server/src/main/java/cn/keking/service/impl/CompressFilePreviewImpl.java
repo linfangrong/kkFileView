@@ -30,7 +30,7 @@ public class CompressFilePreviewImpl implements FilePreview {
 
     @Override
     public String filePreviewHandle(String url, Model model, FileAttribute fileAttribute) {
-        String fileName=fileAttribute.getName();
+        String fileName=fileAttribute.getURLDecodeName();
         String suffix=fileAttribute.getSuffix();
         String fileTree = null;
         // 判断文件名是否存在(redis缓存读取)

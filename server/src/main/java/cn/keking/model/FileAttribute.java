@@ -1,6 +1,10 @@
 package cn.keking.model;
 
 import cn.keking.config.ConfigConstants;
+import org.springframework.util.DigestUtils;
+
+import java.io.*;
+import java.net.URLDecoder;
 
 /**
  * Created by kl on 2018/1/17.
@@ -14,6 +18,9 @@ public class FileAttribute {
     private String url;
     private String fileKey;
     private String officePreviewType = ConfigConstants.getOfficePreviewType();
+
+    @Value("${server.tomcat.uri-encoding:UTF-8}")
+    private String uriEncoding;
 
     public FileAttribute() {
     }
@@ -63,6 +70,18 @@ public class FileAttribute {
 
     public void setSuffix(String suffix) {
         this.suffix = suffix;
+    }
+
+    public String getMd5Name() {
+        return DigestUtils.md5DigestAsHex(name.getBytes()) + name.substring(name.lastIndexOf("."));
+    }
+
+    public String getURLDecodeName() {
+        try {
+            return URLDecoder.decode(name, uriEncoding);
+        } catch (UnsupportedEncodingException e) {
+            return name;
+        }
     }
 
     public String getName() {
