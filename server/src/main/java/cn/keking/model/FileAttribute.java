@@ -1,6 +1,7 @@
 package cn.keking.model;
 
 import cn.keking.config.ConfigConstants;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.DigestUtils;
 
 import java.io.*;
