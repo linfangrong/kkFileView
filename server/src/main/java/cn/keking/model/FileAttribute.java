@@ -1,7 +1,6 @@
 package cn.keking.model;
 
 import cn.keking.config.ConfigConstants;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.DigestUtils;
 
 import java.io.*;
@@ -19,9 +18,6 @@ public class FileAttribute {
     private String url;
     private String fileKey;
     private String officePreviewType = ConfigConstants.getOfficePreviewType();
-
-    @Value("${server.tomcat.uri-encoding:UTF-8}")
-    private String uriEncoding;
 
     public FileAttribute() {
     }
@@ -79,7 +75,7 @@ public class FileAttribute {
 
     public String getURLDecodeName() {
         try {
-            return URLDecoder.decode(name, uriEncoding);
+            return URLDecoder.decode(name, "utf-8");
         } catch (UnsupportedEncodingException e) {
             return name;
         }
