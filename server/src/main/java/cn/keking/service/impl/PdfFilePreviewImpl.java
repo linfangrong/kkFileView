@@ -30,7 +30,7 @@ public class PdfFilePreviewImpl implements FilePreview {
 
     @Override
     public String filePreviewHandle(String url, Model model, FileAttribute fileAttribute) {
-        String fileName = fileAttribute.getName();
+        String fileName = fileAttribute.getMd5Name();
         String officePreviewType = fileAttribute.getOfficePreviewType();
         String baseUrl = BaseUrlFilter.getBaseUrl();
         String pdfName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + "pdf";
@@ -61,7 +61,7 @@ public class PdfFilePreviewImpl implements FilePreview {
             }
         } else {
             // 不是http开头，浏览器不能直接访问，需下载到本地
-            if (url != null && !url.toLowerCase().startsWith("http")) {
+            if ((url != null && !url.toLowerCase().startsWith("http")) || ConfigConstants.getDownloadOrigin()) {
                 if (!fileHandlerService.listConvertedFiles().containsKey(pdfName) || !ConfigConstants.isCacheEnabled()) {
                     ReturnResponse<String> response = DownloadUtils.downLoad(fileAttribute, pdfName);
                     if (response.isFailure()) {

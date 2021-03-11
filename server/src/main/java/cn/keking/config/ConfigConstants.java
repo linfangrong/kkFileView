@@ -33,6 +33,7 @@ public class ConfigConstants {
     private static String FILE_DIR = ConfigUtils.getHomePath() + File.separator + "file" + File.separator;
     private static CopyOnWriteArraySet<String> TRUST_HOST_SET;
     private static String PDF_DOWNLOAD_DISABLE;
+    private static Boolean DOWNLOAD_ORIGIN;
 
     public static final String DEFAULT_CACHE_ENABLED = "true";
     public static final String DEFAULT_TXT_TYPE = "txt,html,htm,asp,jsp,xml,json,properties,md,gitignore,log,java,py,c,cpp,sql,sh,bat,m,bas,prg,cmd";
@@ -46,6 +47,7 @@ public class ConfigConstants {
     public static final String DEFAULT_FILE_DIR_VALUE = "default";
     public static final String DEFAULT_TRUST_HOST = "default";
     public static final String DEFAULT_PDF_DOWNLOAD_DISABLE = "true";
+    public static final String DEFAULT_DOWNLOAD_ORIGIN = "true";
 
     public static Boolean isCacheEnabled() {
         return CACHE_ENABLED;
@@ -218,5 +220,18 @@ public class ConfigConstants {
     }
     public static void setOfficePreviewSwitchDisabledValue(String officePreviewSwitchDisabled) {
         OFFICE_PREVIEW_SWITCH_DISABLED = officePreviewSwitchDisabled;
+    }
+
+    public static Boolean getDownloadOrigin() {
+        return DOWNLOAD_ORIGIN;
+    }
+
+    @Value("${download.origin:true}")
+    public void setDownloadOrigin(String downloadOrigin) {
+        setDownloadOrigin(Boolean.parseBoolean(downloadOrigin));
+    }
+
+    public static void setDownloadOrigin(Boolean downloadOrigin) {
+        DOWNLOAD_ORIGIN = downloadOrigin;
     }
 }
