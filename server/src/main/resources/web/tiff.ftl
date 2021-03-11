@@ -31,6 +31,7 @@
     xhr.responseType = 'arraybuffer';
     xhr.open('GET', $("#currentUrl").val());
     xhr.onload = function (e) {
+        Tiff.initialize({TOTAL_MEMORY: 209715200});
         var tiff = new Tiff({buffer: xhr.response});
         var canvas = tiff.toCanvas();
         $("#tiff").append(canvas)
