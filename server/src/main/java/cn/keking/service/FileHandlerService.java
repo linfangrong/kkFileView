@@ -260,7 +260,10 @@ public class FileHandlerService {
         String suffix;
         FileType type;
         String fileName;
-        String fullFileName = WebUtils.getUrlParameterReg(url, "fullfilename");
+        String fullFileName;
+        if (req != null) {
+            fullFileName = req.getParameter("fullfilename");
+        }
         if (StringUtils.hasText(fullFileName)) {
             fileName = fullFileName;
             type = FileType.typeFromFileName(fullFileName);
