@@ -260,7 +260,7 @@ public class FileHandlerService {
         String suffix;
         FileType type;
         String fileName;
-        String fullFileName;
+        String fullFileName = "";
         if (req != null) {
             fullFileName = req.getParameter("fullfilename");
         }
