@@ -79,6 +79,10 @@ public class KkFileUtils {
         try {
             String encoding = cp.guessEncoding(file);
             LOGGER.info("检测到文件【{}】编码: {}", file.getAbsolutePath(), encoding);
+            if encoding.toLowerCase().startsWith("utf") {
+                LOGGER.info("文件【{}】使用默认编码: UTF-8", file.getAbsolutePath());
+                return DEFAULT_FILE_ENCODING;
+            }
             return encoding;
         } catch (IOException e) {
             LOGGER.warn("文件编码获取失败，采用默认的编码格式：UTF-8", e);
