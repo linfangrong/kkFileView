@@ -6,7 +6,7 @@
     <parent>
         <artifactId>filepreview</artifactId>
         <groupId>cn.keking</groupId>
-        <version>3.3.1</version>
+        <version>3.5</version>
     </parent>
 
     <artifactId>kkFileView</artifactId>
@@ -205,9 +205,6 @@
             </resource>
             <resource>
                 <directory>src/main/config</directory>
-                <excludes>
-                    <exclude>${build.exclude.resource}</exclude>
-                </excludes>
                 <filtering>true</filtering>
             </resource>
         </resources>
@@ -215,6 +212,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
@@ -231,7 +229,8 @@
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
-                        <descriptor>src/main/assembly/assembly.xml</descriptor>
+                        <descriptor>src/main/assembly/dist-win32.xml</descriptor>
+                        <descriptor>src/main/assembly/dist-linux.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
