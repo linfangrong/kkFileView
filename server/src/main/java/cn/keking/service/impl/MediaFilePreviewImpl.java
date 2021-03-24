@@ -30,7 +30,8 @@ public class MediaFilePreviewImpl implements FilePreview {
     @Override
     public String filePreviewHandle(String url, Model model, FileAttribute fileAttribute) {
         // 不是http开头，浏览器不能直接访问，需下载到本地
-        if ((url != null && !url.toLowerCase().startsWith("http")) || ConfigConstants.getDownloadOrigin()) {
+        String baseUrl = BaseUrlFilter.getBaseUrl();
+        if (url != null && (!url.toLowerCase().startsWith("http") || (ConfigConstants.getDownloadOrigin() && !url.startsWith(baseUrl)))) {
             ReturnResponse<String> response = DownloadUtils.downLoad(fileAttribute, fileAttribute.getName());
             if (response.isFailure()) {
                 return otherFilePreview.notSupportedFile(model, fileAttribute, response.getMsg());

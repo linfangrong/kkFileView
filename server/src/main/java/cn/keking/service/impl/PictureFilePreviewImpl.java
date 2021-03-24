@@ -6,6 +6,7 @@ import cn.keking.model.ReturnResponse;
 import cn.keking.service.FilePreview;
 import cn.keking.utils.DownloadUtils;
 import cn.keking.service.FileHandlerService;
+import cn.keking.web.filter.BaseUrlFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -37,7 +38,8 @@ public class PictureFilePreviewImpl implements FilePreview {
             imgUrls.addAll(zipImgUrls);
         }
         // 不是http开头，浏览器不能直接访问，需下载到本地
-        if ((url != null && !url.toLowerCase().startsWith("http")) || ConfigConstants.getDownloadOrigin()) {
+        String baseUrl = BaseUrlFilter.getBaseUrl();
+        if (url != null && (!url.toLowerCase().startsWith("http") || (ConfigConstants.getDownloadOrigin() && !url.startsWith(baseUrl)))) {
             ReturnResponse<String> response = DownloadUtils.downLoad(fileAttribute, null);
             if (response.isFailure()) {
                 return otherFilePreview.notSupportedFile(model, fileAttribute, response.getMsg());
