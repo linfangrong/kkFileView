@@ -191,15 +191,16 @@ public class CompressFileReader {
     }
 
     private void addNodes(Map<String, FileNode> appender, String parentName, FileNode node) {
+        if (appender.isEmpty()) {
+            FileNode nodeRoot = new FileNode(parentName, parentName, "", new ArrayList<>(), true);
+            appender.put("", nodeRoot);
+        }
         if (appender.containsKey(parentName)) {
             appender.get(parentName).getChildList().add(node);
             appender.get(parentName).getChildList().sort(sortComparator);
         } else {
-            // 根节点
-            FileNode nodeRoot = new FileNode(parentName, parentName, "", new ArrayList<>(), true);
-            nodeRoot.getChildList().add(node);
-            appender.put("", nodeRoot);
-            appender.put(parentName, nodeRoot);
+            appender.get("").getChildList().add(node);
+            appender.get("").getChildList().sort(sortComparator);
         }
     }
 
