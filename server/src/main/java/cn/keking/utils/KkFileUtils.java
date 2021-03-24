@@ -1,12 +1,15 @@
 package cn.keking.utils;
 
 import cpdetector.CharsetPrinter;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.model.FileHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 
 public class KkFileUtils {
@@ -154,6 +157,43 @@ public class KkFileUtils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 检测zip编码格式
+     *
+     * @param file 检测的文件
+     * @return 编码格式
+     */
+    @SuppressWarnings("unchecked")
+    public static String getZipEncode(String filePath) {
+        String encoding = "GBK";
+        try {
+            ZipFile zipFile = new ZipFile(filePath);
+            zipFile.setFileNameCharset(encoding);
+            List<FileHeader> list = zipFile.getFileHeaders();
+            for (int i = 0; i < list.size(); i++) {
+                FileHeader fileHeader = list.get(i);
+                String fileName = fileHeader.getFileName();
+                if (isMessyCode(fileName)) {
+                    encoding = "UTF-8";
+                    break;
+                }
+            }
+            return encoding;
+        } catch (ZipException e) {
+            return DEFAULT_FILE_ENCODING;
+        }
+    }
+
+    private static boolean isMessyCode(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if ((int) c == 0xfffd) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
