@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController {
 
+    /*
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String go2Index(){
         return "index";
@@ -21,4 +22,5 @@ public class IndexController {
     public String root() {
         return "redirect:/index";
     }
+    */
 }

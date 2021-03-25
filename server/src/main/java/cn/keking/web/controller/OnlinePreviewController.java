@@ -3,6 +3,7 @@ package cn.keking.web.controller;
 import cn.keking.model.FileAttribute;
 import cn.keking.service.FilePreview;
 import cn.keking.service.FilePreviewFactory;
+import cn.keking.service.PdfDownloadService;
 
 import cn.keking.service.cache.CacheService;
 import cn.keking.service.impl.OtherFilePreviewImpl;
@@ -44,12 +45,14 @@ public class OnlinePreviewController {
     private final CacheService cacheService;
     private final FileHandlerService fileHandlerService;
     private final OtherFilePreviewImpl otherFilePreview;
+    private final PdfDownloadService pdfDownloadService;
 
-    public OnlinePreviewController(FilePreviewFactory filePreviewFactory, FileHandlerService fileHandlerService, CacheService cacheService, OtherFilePreviewImpl otherFilePreview) {
+    public OnlinePreviewController(FilePreviewFactory filePreviewFactory, FileHandlerService fileHandlerService, CacheService cacheService, OtherFilePreviewImpl otherFilePreview, PdfDownloadService pdfDownloadService) {
         this.previewFactory = filePreviewFactory;
         this.fileHandlerService = fileHandlerService;
         this.cacheService = cacheService;
         this.otherFilePreview = otherFilePreview;
+        this.pdfDownloadService = pdfDownloadService;
     }
 
     @RequestMapping(value = "/onlinePreview")
@@ -125,4 +128,19 @@ public class OnlinePreviewController {
         return "success";
     }
 
+    @RequestMapping(value = "/pdfDownload")
+    public String pdfDownload(String url, Model model, HttpServletRequest req, HttpServletResponse response) {
+        String fileUrl;
+        try {
+            fileUrl = new String(Base64.decodeBase64(url), StandardCharsets.UTF_8);
+        } catch (Exception ex) {
+            String errorMsg = String.format(BASE64_DECODE_ERROR_MSG, "url");
+            return otherFilePreview.notSupportedFile(model, errorMsg);
+        }
+        FileAttribute fileAttribute = fileHandlerService.getFileAttribute(fileUrl, req);
+        model.addAttribute("file", fileAttribute);
+        FilePreview filePreview = previewFactory.get(fileAttribute);
+        logger.info("预览文件url：{}，previewType：{}", fileUrl, fileAttribute.getType());
+        return pdfDownloadService.pdfDownloadHandle(fileUrl, model, fileAttribute, response);
+    }
 }
