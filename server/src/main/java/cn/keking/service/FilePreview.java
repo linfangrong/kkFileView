@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 public interface FilePreview {
 
     String FLV_FILE_PREVIEW_PAGE = "flv";
-    String PDF_FILE_PREVIEW_PAGE = "pdf";
+    String PDF_FILE_PREVIEW_PAGE = "html";
     String COMPRESS_FILE_PREVIEW_PAGE = "compress";
     String MEDIA_FILE_PREVIEW_PAGE = "media";
     String PICTURE_FILE_PREVIEW_PAGE = "picture";
