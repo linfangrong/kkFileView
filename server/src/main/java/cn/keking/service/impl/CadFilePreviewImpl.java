@@ -40,6 +40,7 @@ public class CadFilePreviewImpl implements FilePreview {
         String fileName = fileAttribute.getName();
         String pdfName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + "pdf";
         String outFilePath = FILE_DIR + pdfName;
+        boolean isAplus = fileAttribute.uaIsAplus();
         // 判断之前是否已转换过，如果转换过，直接返回，否则执行转换
         if (!fileHandlerService.listConvertedFiles().containsKey(pdfName) || !ConfigConstants.isCacheEnabled()) {
             String filePath;
@@ -63,7 +64,7 @@ public class CadFilePreviewImpl implements FilePreview {
             return getPreviewType(model, fileAttribute, officePreviewType, baseUrl, pdfName, outFilePath, fileHandlerService, OFFICE_PREVIEW_TYPE_IMAGE,otherFilePreview);
         }
         model.addAttribute("pdfUrl", pdfName);
-        return PDF_FILE_PREVIEW_PAGE;
+        return isAplus ? PDF_FIlE_HTML_PREVIEW_PAGE : PDF_FILE_PREVIEW_PAGE;
     }
 
 

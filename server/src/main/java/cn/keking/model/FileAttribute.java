@@ -18,6 +18,7 @@ public class FileAttribute {
     private String url;
     private String fileKey;
     private String officePreviewType = ConfigConstants.getOfficePreviewType();
+    private String UA;
 
     public FileAttribute() {
     }
@@ -95,5 +96,13 @@ public class FileAttribute {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public boolean uaIsAplus() {
+        return UA.toLowerCase().contains("dtsaas");
+    }
+
+    public void setUA(String ua) {
+        this.UA = ua;
     }
 }

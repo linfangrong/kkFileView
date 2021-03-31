@@ -45,6 +45,7 @@ public class OfficeFilePreviewImpl implements FilePreview {
         boolean isHtml = suffix.equalsIgnoreCase("xls") || suffix.equalsIgnoreCase("xlsx") || suffix.equalsIgnoreCase("et");
         String pdfName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + (isHtml ? "html" : "pdf");
         String outFilePath = FILE_DIR + pdfName;
+        boolean isAplus = fileAttribute.uaIsAplus();
         // 判断之前是否已转换过，如果转换过，直接返回，否则执行转换
         if (!fileHandlerService.listConvertedFiles().containsKey(pdfName) || !ConfigConstants.isCacheEnabled()) {
             String filePath;
@@ -69,7 +70,7 @@ public class OfficeFilePreviewImpl implements FilePreview {
             return getPreviewType(model, fileAttribute, officePreviewType, baseUrl, pdfName, outFilePath, fileHandlerService, OFFICE_PREVIEW_TYPE_IMAGE, otherFilePreview);
         }
         model.addAttribute("pdfUrl", pdfName);
-        return isHtml ? EXEL_FILE_PREVIEW_PAGE : PDF_FILE_PREVIEW_PAGE;
+        return isHtml ? EXEL_FILE_PREVIEW_PAGE : (isAplus ? PDF_FIlE_HTML_PREVIEW_PAGE : PDF_FILE_PREVIEW_PAGE);
     }
 
     static String getPreviewType(Model model, FileAttribute fileAttribute, String officePreviewType, String baseUrl, String pdfName, String outFilePath, FileHandlerService fileHandlerService, String officePreviewTypeImage, OtherFilePreviewImpl otherFilePreview) {

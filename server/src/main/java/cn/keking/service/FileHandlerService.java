@@ -280,11 +280,15 @@ public class FileHandlerService {
         if (req != null) {
             String officePreviewType = req.getParameter("officePreviewType");
             String fileKey = WebUtils.getUrlParameterReg(url,"fileKey");
+            String userAgent = req.getHeader("user-agent");
             if (StringUtils.hasText(officePreviewType)) {
                 attribute.setOfficePreviewType(officePreviewType);
             }
             if (StringUtils.hasText(fileKey)) {
                 attribute.setFileKey(fileKey);
+            }
+            if (StringUtils.hasText(userAgent)) {
+                attribute.setUA(userAgent);
             }
         }
         return attribute;

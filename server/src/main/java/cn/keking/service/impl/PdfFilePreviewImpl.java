@@ -35,6 +35,7 @@ public class PdfFilePreviewImpl implements FilePreview {
         String baseUrl = BaseUrlFilter.getBaseUrl();
         String pdfName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + "pdf";
         String outFilePath = FILE_DIR + pdfName;
+        boolean isAplus = fileAttribute.uaIsAplus();
         if (OfficeFilePreviewImpl.OFFICE_PREVIEW_TYPE_IMAGE.equals(officePreviewType) || OfficeFilePreviewImpl.OFFICE_PREVIEW_TYPE_ALL_IMAGES.equals(officePreviewType)) {
             //当文件不存在时，就去下载
             if (!fileHandlerService.listConvertedFiles().containsKey(pdfName) || !ConfigConstants.isCacheEnabled()) {
@@ -79,6 +80,6 @@ public class PdfFilePreviewImpl implements FilePreview {
                 model.addAttribute("pdfUrl", url);
             }
         }
-        return PDF_FILE_PREVIEW_PAGE;
+        return isAplus ? PDF_FIlE_HTML_PREVIEW_PAGE : PDF_FILE_PREVIEW_PAGE;
     }
 }
