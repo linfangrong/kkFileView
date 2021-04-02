@@ -71,7 +71,7 @@ public class FileAttribute {
     }
 
     public String getMd5Name() {
-        return DigestUtils.md5DigestAsHex(name.getBytes()) + name.substring(name.lastIndexOf("."));
+        return DigestUtils.md5DigestAsHex(url.getBytes() + "." + suffix);
     }
 
     public String getURLDecodeName() {
