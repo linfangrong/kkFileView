@@ -41,7 +41,7 @@ public class OfficeFilePreviewImpl implements FilePreview {
         String officePreviewType = fileAttribute.getOfficePreviewType();
         String baseUrl = BaseUrlFilter.getBaseUrl();
         String suffix = fileAttribute.getSuffix();
-        String fileName = fileAttribute.getMd5Name();
+        String fileName = fileAttribute.getHashName();
         boolean isHtml = suffix.equalsIgnoreCase("xls") || suffix.equalsIgnoreCase("xlsx") || suffix.equalsIgnoreCase("et");
         String pdfName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + (isHtml ? "html" : "pdf");
         String outFilePath = FILE_DIR + pdfName;

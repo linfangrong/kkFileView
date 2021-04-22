@@ -1,7 +1,7 @@
 package cn.keking.model;
 
 import cn.keking.config.ConfigConstants;
-import org.springframework.util.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -70,8 +70,8 @@ public class FileAttribute {
         this.suffix = suffix;
     }
 
-    public String getMd5Name() {
-        return DigestUtils.md5DigestAsHex(url.getBytes()) + "." + suffix;
+    public String getHashName() {
+        return DigestUtils.sha256Hex(url.getBytes()) + "." + suffix;
     }
 
     public String getURLDecodeName() {

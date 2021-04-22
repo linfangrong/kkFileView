@@ -30,7 +30,7 @@ public class PdfFilePreviewImpl implements FilePreview {
 
     @Override
     public String filePreviewHandle(String url, Model model, FileAttribute fileAttribute) {
-        String fileName = fileAttribute.getMd5Name();
+        String fileName = fileAttribute.getHashName();
         String officePreviewType = fileAttribute.getOfficePreviewType();
         String baseUrl = BaseUrlFilter.getBaseUrl();
         String pdfName = fileName.substring(0, fileName.lastIndexOf(".") + 1) + "pdf";

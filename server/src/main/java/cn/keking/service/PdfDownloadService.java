@@ -43,7 +43,7 @@ public class PdfDownloadService {
         String baseUrl = BaseUrlFilter.getBaseUrl();
         String suffix = fileAttribute.getSuffix();
         String fileName = fileAttribute.getName();
-        String fileMd5Name = fileAttribute.getMd5Name();
+        String fileMd5Name = fileAttribute.getHashName();
         String pdfName = fileMd5Name.substring(0, fileMd5Name.lastIndexOf(".") + 1) + "pdf";
         String outFilePath = FILE_DIR + pdfName;
         // 判断之前是否已转换过，如果转换过，直接返回，否则执行转换
