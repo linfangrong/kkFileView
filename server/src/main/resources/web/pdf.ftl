@@ -21,7 +21,7 @@
 </#if>
 </body>
 <script type="text/javascript">
-    document.getElementsByTagName('iframe')[0].src = "${baseUrl}pdfjs/web/viewer.html?base=${baseUrl}&file=" + encodeURIComponent('${finalUrl}') + "&disabledownload=${pdfDownloadDisable}";
+    //document.getElementsByTagName('iframe')[0].src = "${baseUrl}pdfjs/web/viewer.html?base=${baseUrl}&file=" + encodeURIComponent('${finalUrl}') + "&disabledownload=${pdfDownloadDisable}";
     document.getElementsByTagName('iframe')[0].height = document.documentElement.clientHeight - 10;
     /**
      * 页面变化调整高度
@@ -44,6 +44,25 @@
     /*初始化水印*/
     window.onload = function () {
         initWaterMark();
+    }
+
+    var iframeInterval = setInterval("checkrefresh()", 500);
+    var iframeTimeout = setTimeout("checktimeout()", 30000);
+    function checkrefresh() {
+        $.ajax({
+            url: "${finalUrl}",
+            type: "HEAD",
+            async: true,
+            success: function() {
+                clearInterval(iframeInterval);
+                clearTimeout(iframeTimeout);
+                $('iframe').attr('src', "${baseUrl}pdfjs/web/viewer.html?base=${baseUrl}&file=" + encodeURIComponent('${finalUrl}') + "&disabledownload=${pdfDownloadDisable}");
+            },
+        })
+    }
+    function checktimeout() {
+        clearInterval(iframeInterval);
+        $('iframe').attr('src', "${baseUrl}pdfjs/web/viewer.html?base=${baseUrl}&file=" + encodeURIComponent('${finalUrl}') + "&disabledownload=${pdfDownloadDisable}");
     }
 </script>
 </html>
