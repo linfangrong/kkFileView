@@ -63,7 +63,7 @@ public class FileAttribute {
     }
 
     public String getSuffix() {
-        return suffix;
+        return suffix.toLowerCase();
     }
 
     public void setSuffix(String suffix) {
@@ -71,7 +71,7 @@ public class FileAttribute {
     }
 
     public String getHashName() {
-        return DigestUtils.sha256Hex(url.getBytes()) + "." + suffix;
+        return DigestUtils.sha256Hex(url.getBytes()) + "." + suffix.toLowerCase();
     }
 
     public String getURLDecodeName() {
