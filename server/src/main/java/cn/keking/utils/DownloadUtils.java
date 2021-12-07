@@ -36,7 +36,7 @@ public class DownloadUtils {
         ReturnResponse<String> response = new ReturnResponse<>(0, "下载成功!!!", "");
         String realPath = DownloadUtils.getRelFilePath(fileName, fileAttribute);
         try {
-            URL url = WebUtils.normalizedURL(urlStr);
+            URL url = new URL(urlStr);
             if (isHttpUrl(url)) {
                 File realFile = new File(realPath);
                 FileUtils.copyURLToFile(url,realFile);
@@ -52,7 +52,7 @@ public class DownloadUtils {
             response.setContent(realPath);
             response.setMsg(fileName);
             return response;
-        } catch (IOException | GalimatiasParseException e) {
+        } catch (IOException e) {
             logger.error("文件下载失败，url：{}", urlStr, e);
             response.setCode(1);
             response.setContent(null);
