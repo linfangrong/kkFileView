@@ -14,6 +14,7 @@ import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.DependsOn;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -30,6 +31,7 @@ import java.util.regex.Pattern;
  * create 2017/11/27
  */
 @Component
+@DependsOn("configConstants")
 public class CompressFileReader {
 
     private static final Pattern pattern = Pattern.compile("^\\d+");

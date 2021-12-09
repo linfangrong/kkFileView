@@ -8,6 +8,7 @@ import cn.keking.utils.DownloadUtils;
 import cn.keking.service.FileHandlerService;
 import cn.keking.web.filter.BaseUrlFilter;
 import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
  * Content :处理pdf文件
  */
 @Service
+@DependsOn("configConstants")
 public class PdfFilePreviewImpl implements FilePreview {
 
     private final FileHandlerService fileHandlerService;

@@ -13,6 +13,7 @@ import cn.keking.service.OfficeToPdfService;
 import cn.keking.service.impl.OtherFilePreviewImpl;
 import cn.keking.web.filter.BaseUrlFilter;
 import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
+@DependsOn("configConstants")
 public class PdfDownloadService {
 
     private static final String FILE_DIR = ConfigConstants.getFileDir();

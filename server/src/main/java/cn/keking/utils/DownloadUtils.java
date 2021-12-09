@@ -5,6 +5,7 @@ import cn.keking.model.FileAttribute;
 import cn.keking.model.ReturnResponse;
 import io.mola.galimatias.GalimatiasParseException;
 import org.apache.commons.io.FileUtils;
+import org.springframework.context.annotation.DependsOn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,7 @@ import static cn.keking.utils.KkFileUtils.isHttpUrl;
 /**
  * @author yudian-it
  */
+@DependsOn("configConstants")
 public class DownloadUtils {
 
     private final static Logger logger = LoggerFactory.getLogger(DownloadUtils.class);

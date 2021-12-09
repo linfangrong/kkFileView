@@ -9,6 +9,7 @@ import cn.keking.service.FileHandlerService;
 import cn.keking.service.OfficeToPdfService;
 import cn.keking.web.filter.BaseUrlFilter;
 import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
@@ -19,6 +20,7 @@ import java.util.List;
  * Content :处理office文件
  */
 @Service
+@DependsOn("configConstants")
 public class OfficeFilePreviewImpl implements FilePreview {
 
     public static final String OFFICE_PREVIEW_TYPE_IMAGE = "image";

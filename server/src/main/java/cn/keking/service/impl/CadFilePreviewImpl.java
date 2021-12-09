@@ -8,6 +8,7 @@ import cn.keking.utils.DownloadUtils;
 import cn.keking.service.FileHandlerService;
 import cn.keking.web.filter.BaseUrlFilter;
 import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
@@ -18,6 +19,7 @@ import static cn.keking.service.impl.OfficeFilePreviewImpl.getPreviewType;
  * @since 2019/11/21 14:28
  */
 @Service
+@DependsOn("configConstants")
 public class CadFilePreviewImpl implements FilePreview {
 
     private static final String OFFICE_PREVIEW_TYPE_IMAGE = "image";

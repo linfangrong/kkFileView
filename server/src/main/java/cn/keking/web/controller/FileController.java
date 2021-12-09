@@ -8,6 +8,7 @@ import cn.keking.model.ReturnResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StreamUtils;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ import org.springframework.web.util.HtmlUtils;
  * @date 2017/12/1
  */
 @RestController
+@DependsOn("configConstants")
 public class FileController {
 
     private final Logger logger = LoggerFactory.getLogger(FileController.class);

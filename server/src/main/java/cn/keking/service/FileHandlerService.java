@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,7 @@ import java.util.Map;
  * @date 2017/11/13
  */
 @Component
+@DependsOn("configConstants")
 public class FileHandlerService {
 
     private final Logger logger = LoggerFactory.getLogger(FileHandlerService.class);
